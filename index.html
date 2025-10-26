@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dovi's Custom 3D Judaica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            /* Uncomment and add your logo path below */
+            /* background-image: url('path/to/your/logo.png'); */
+            /* background-size: contain; */
+            /* background-repeat: no-repeat; */
+            /* background-position: center; */
+            width: 60px;
+            height: 60px;
+        }
+
+        /* Product Grid */
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-card.visited {
+            box-shadow: 0 0 0 3px #e0e7ff;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .product-info {
+            padding: 16px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 12px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .star-btn {
+            background: #f0f0f0;
+            color: #666;
+            max-width: 44px;
+        }
+
+        .star-btn.favorited {
+            background: #ffd700;
+            color: #fff;
+        }
+
+        .buy-btn {
+            background: #000;
+            color: white;
+        }
+
+        .buy-btn:hover {
+            background: #333;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(0,0,0,0.7);
+        }
+
+        .image-slider {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .slider-image.active {
+            display: block;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .slider-btn:hover {
+            background: rgba(0,0,0,0.7);
+        }
+
+        .slider-btn.prev {
+            left: 16px;
+        }
+
+        .slider-btn.next {
+            right: 16px;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: white;
+        }
+
+        .modal-details {
+            padding: 32px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .modal-star {
+            background: #f0f0f0;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .modal-star.favorited {
+            background: #ffd700;
+            color: #fff;
+        }
+
+        .modal-price {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .modal-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal-buy-btn {
+            width: 100%;
+            padding: 16px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-buy-btn:hover {
+            background: #333;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 16px;
+            }
+
+            .product-image {
+                height: 200px;
+            }
+
+            .image-slider {
+                height: 300px;
+            }
+
+            .modal-details {
+                padding: 20px;
+            }
+
+            header {
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"></div>
+    </header>
+
+    <div class="container">
+        <div class="products-grid" id="productsGrid"></div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            
+            <div class="image-slider">
+                <div id="sliderImages"></div>
+                <button class="slider-btn prev" onclick="prevImage()">‹</button>
+                <button class="slider-btn next" onclick="nextImage()">›</button>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+
+            <div class="modal-details">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <button class="modal-star" id="modalStar" onclick="toggleModalFavorite()">★</button>
+                </div>
+                <div class="modal-price" id="modalPrice"></div>
+                <p class="modal-description" id="modalDescription"></p>
+                <button class="modal-buy-btn" id="modalBuyBtn">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let products = [];
+        let currentProduct = null;
+        let currentImageIndex = 0;
+        let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        let visitedProducts = JSON.parse(localStorage.getItem('visited') || '[]');
+
+        // Load products from JSON
+        async function loadProducts() {
+            try {
+                const response = await fetch('products.json');
+                products = await response.json();
+                renderProducts();
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        // Render product grid
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map((product, index) => `
+                <div class="product-card ${visitedProducts.includes(product.id) ? 'visited' : ''}" 
+                     onclick="openModal(${index})">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">${product.price}</div>
+                        <div class="product-actions">
+                            <button class="btn star-btn ${favorites.includes(product.id) ? 'favorited' : ''}" 
+                                    onclick="toggleFavorite(event, '${product.id}')">★</button>
+                            <button class="btn buy-btn" onclick="buyNow(event, '${product.stripeLink}')">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toggle favorite
+        function toggleFavorite(event, productId) {
+            event.stopPropagation();
+            const index = favorites.indexOf(productId);
+            if (index > -1) {
+                favorites.splice(index, 1);
+            } else {
+                favorites.push(productId);
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            renderProducts();
+        }
+
+        // Buy now
+        function buyNow(event, stripeLink) {
+            event.stopPropagation();
+            window.open(stripeLink, '_blank');
+        }
+
+        // Open modal
+        function openModal(index) {
+            currentProduct = products[index];
+            currentImageIndex = 0;
+            
+            // Mark as visited
+            if (!visitedProducts.includes(currentProduct.id)) {
+                visitedProducts.push(currentProduct.id);
+                localStorage.setItem('visited', JSON.stringify(visitedProducts));
+                renderProducts();
+            }
+
+            // Set modal content
+            document.getElementById('modalTitle').textContent = currentProduct.name;
+            document.getElementById('modalPrice').textContent = currentProduct.price;
+            document.getElementById('modalDescription').textContent = currentProduct.description;
+            
+            // Update star button
+            const modalStar = document.getElementById('modalStar');
+            modalStar.className = favorites.includes(currentProduct.id) ? 'modal-star favorited' : 'modal-star';
+            
+            // Set buy button
+            document.getElementById('modalBuyBtn').onclick = () => {
+                window.open(currentProduct.stripeLink, '_blank');
+            };
+
+            // Render images
+            renderSliderImages();
+
+            // Show modal
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Render slider images
+        function renderSliderImages() {
+            const images = currentProduct.images || [currentProduct.image];
+            const sliderImages = document.getElementById('sliderImages');
+            sliderImages.innerHTML = images.map((img, i) => `
+                <img src="${img}" class="slider-image ${i === 0 ? 'active' : ''}" alt="${currentProduct.name}">
+            `).join('');
+
+            const dots = document.getElementById('sliderDots');
+            dots.innerHTML = images.map((_, i) => `
+                <span class="dot ${i === 0 ? 'active' : ''}" onclick="goToImage(${i})"></span>
+            `).join('');
+
+            // Hide nav buttons if only one image
+            const prevBtn = document.querySelector('.slider-btn.prev');
+            const nextBtn = document.querySelector('.slider-btn.next');
+            if (images.length <= 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                dots.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'block';
+                dots.style.display = 'flex';
+            }
+        }
+
+        // Navigate images
+        function prevImage() {
+            const images = currentProduct.images || [currentProduct.image];
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateSlider();
+        }
+
+        function nextImage() {
+            const images = currentProduct.images || [currentProduct.image];
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateSlider();
+        }
+
+        function goToImage(index) {
+            currentImageIndex = index;
+            updateSlider();
+        }
+
+        function updateSlider() {
+            const images = document.querySelectorAll('.slider-image');
+            const dots = document.querySelectorAll('.dot');
+            
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === currentImageIndex);
+            });
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentImageIndex);
+            });
+        }
+
+        // Toggle modal favorite
+        function toggleModalFavorite() {
+            toggleFavorite(event, currentProduct.id);
+            const modalStar = document.getElementById('modalStar');
+            modalStar.className = favorites.includes(currentProduct.id) ? 'modal-star favorited' : 'modal-star';
+        }
+
+        // Close modal on outside click
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target.id === 'productModal') {
+                closeModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        });
+
+        // Load products on page load
+        loadProducts();
+    </script>
+</body>
+</html>
