@@ -1,0 +1,96 @@
+[
+  {
+    "id": "am-yisrael-chai-keychain",
+    "name": "Am Yisrael Chai Keychain",
+    "price": "$15.00 USD",
+    "description": "Beautiful gold-colored Am Yisrael Chai keychain with decorative details. Perfect accessory to show your pride and faith.",
+    "image": "images/am-yisrael-chai-keychain.jpg",
+    "images": [
+      "images/am-yisrael-chai-keychain.jpg",
+      "images/am-yisrael-chai-keychain-2.jpg",
+      "images/am-yisrael-chai-keychain-3.jpg"
+    ],
+    "stripeLink": "https://buy.stripe.com/your-product-link-1"
+  },
+  {
+    "id": "bedazzled-mezuzah",
+    "name": "Bedazzled Children's Mezuzahs",
+    "price": "$49.99 USD",
+    "description": "Adorable pink mezuzah decorated with sparkles and ballet shoe design. Perfect for a child's room.",
+    "image": "images/bedazzled-mezuzah.jpg",
+    "images": [
+      "images/bedazzled-mezuzah.jpg",
+      "images/bedazzled-mezuzah-2.jpg"
+    ],
+    "stripeLink": "https://buy.stripe.com/your-product-link-2"
+  },
+  {
+    "id": "custom-bow-holder",
+    "name": "Bedazzled Custom Bow Holder",
+    "price": "$35.00 USD",
+    "description": "Custom bedazzled letter bow holder with ribbon. Personalized storage solution with sparkle and style.",
+    "image": "images/custom-bow-holder.jpg",
+    "images": [
+      "images/custom-bow-holder.jpg"
+    ],
+    "stripeLink": "https://buy.stripe.com/your-product-link-3"
+  },
+  {
+    "id": "chai-keychain-blue",
+    "name": "Chai Keychain",
+    "price": "$15.00 USD",
+    "description": "Elegant blue and gold Chai keychain with crystal accents. A meaningful gift for any occasion.",
+    "image": "images/chai-keychain-blue.jpg",
+    "images": [
+      "images/chai-keychain-blue.jpg",
+      "images/chai-keychain-blue-2.jpg"
+    ],
+    "stripeLink": "https://buy.stripe.com/your-product-link-4"
+  },
+  {
+    "id": "dove-bookends",
+    "name": "Peace Dove Bookends",
+    "price": "$29.99 USD",
+    "description": "Elegant white dove bookends. Beautiful and functional addition to any bookshelf.",
+    "image": "images/dove-bookends.jpg",
+    "images": [
+      "images/dove-bookends.jpg"
+    ],
+    "stripeLink": "https://buy.stripe.com/your-product-link-5"
+  },
+  {
+    "id": "shema-yisrael-blue",
+    "name": "Shema Yisrael Wall Art - Blue",
+    "price": "$39.99 USD",
+    "description": "Beautiful blue 3D printed Shema Yisrael wall art. Modern Hebrew text design for your home.",
+    "image": "images/shema-blue.jpg",
+    "images": [
+      "images/shema-blue.jpg",
+      "images/shema-blue-2.jpg"
+    ],
+    "stripeLink": "https://buy.stripe.com/your-product-link-6"
+  },
+  {
+    "id": "shema-yisrael-blue-2",
+    "name": "Shema Yisrael Plaque - Blue",
+    "price": "$39.99 USD",
+    "description": "3D Hebrew text plaque featuring the Shema prayer. Available in vibrant blue finish.",
+    "image": "images/shema-blue-plaque.jpg",
+    "images": [
+      "images/shema-blue-plaque.jpg"
+    ],
+    "stripeLink": "https://buy.stripe.com/your-product-link-7"
+  },
+  {
+    "id": "shema-yisrael-gold",
+    "name": "Shema Yisrael Wall Art - Gold",
+    "price": "$39.99 USD",
+    "description": "Stunning gold 3D printed Shema Yisrael wall art. Elegant Hebrew design perfect for any space.",
+    "image": "images/shema-gold.jpg",
+    "images": [
+      "images/shema-gold.jpg",
+      "images/shema-gold-2.jpg"
+    ],
+    "stripeLink": "https://buy.stripe.com/your-product-link-8"
+  }
+]
