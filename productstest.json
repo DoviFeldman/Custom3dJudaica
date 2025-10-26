@@ -48,10 +48,10 @@
     "stripeLink": "https://buy.stripe.com/your-product-link-4"
   },
   {
-    "id": "dove-bookends",
-    "name": "Peace Dove Bookends",
-    "price": "$29.99 USD",
-    "description": "Elegant white dove bookends. Beautiful and functional addition to any bookshelf.",
+    "id": "Custom Monogram Napkin Rings Set of 6",
+    "name": "Custom Monogram Napkin Rings Set of 6",
+    "price": "$39.99 USD",
+    "description": " ",
     "image": "images/dove-bookends.jpg",
     "images": [
       "images/dove-bookends.jpg"
@@ -59,10 +59,10 @@
     "stripeLink": "https://buy.stripe.com/your-product-link-5"
   },
   {
-    "id": "shema-yisrael-blue",
-    "name": "Shema Yisrael Wall Art - Blue",
-    "price": "$39.99 USD",
-    "description": "Beautiful blue 3D printed Shema Yisrael wall art. Modern Hebrew text design for your home.",
+    "id": "Customizable Big Dreidel",
+    "name": "Customizable Big Dreidel",
+    "price": "$9.99 USD",
+    "description": " ",
     "image": "images/shema-blue.jpg",
     "images": [
       "images/shema-blue.jpg",
@@ -71,10 +71,10 @@
     "stripeLink": "https://buy.stripe.com/your-product-link-6"
   },
   {
-    "id": "shema-yisrael-blue-2",
-    "name": "Shema Yisrael Plaque - Blue",
-    "price": "$39.99 USD",
-    "description": "3D Hebrew text plaque featuring the Shema prayer. Available in vibrant blue finish.",
+    "id": "Customized Business Logo",
+    "name": "Customized Business Logo",
+    "price": "$74 USD",
+    "description": " ",
     "image": "images/shema-blue-plaque.jpg",
     "images": [
       "images/shema-blue-plaque.jpg"
